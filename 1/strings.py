@@ -31,6 +31,5 @@ for i in range(N_HASH_BINS):
 
 FILES = tuple(FILES)
 
-def get_bin_file(string):
-    """Return a file object associated with bin"""
-    
+def get_bin_file(hashed):
+    """Return a file object associated with int hashed"""
