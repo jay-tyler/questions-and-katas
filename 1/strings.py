@@ -23,13 +23,29 @@ BIN_SIZE = (2 * sys.maxsize) / N_HASH_BINS  # sys.maxsize signed; TODO: check im
 BIN_DIR = 'bins'
 FILES = []
 
-for i in range(N_HASH_BINS):
-    lower_bin_limit = -sys.maxsize + i * BIN_SIZE
-    filename = "{dir}/{bin}.txt".format(dir=BIN_DIR, bin=lower_bin_limit)
-    with open(filename, 'w+') as file:
-        FILES.append(filename)
+def create_bins():
+    for i in range(N_HASH_BINS):
+        lower_bin_limit = -sys.maxsize + i * BIN_SIZE
+        filename = "{dir}/{bin}.txt".format(dir=BIN_DIR, bin=lower_bin_limit)
+        with open(filename, 'w+') as file:
+            FILES.append(filename)
 
 FILES = tuple(FILES)
 
-def get_bin_file(hashed):
-    """Return a file object associated with int hashed"""
+def bin_for_index():
+
+def get_bin_index(hashed):
+    """Return int index associated with int hashed"""
+    lower_limit = -sys.maxsize
+    i = 0
+
+    for i in range(N_HASH_BINS):
+        if lower_limit <= hashed < (lower_limit + BIN_SIZE):
+            break
+        i += 1
+        lower_limit = -sys.maxsize + i * BIN_SIZE  # TODO: Repeated expression; wrap into function
+
+    return i
+
+if __name__ == "__main__":
+    create_bins()
